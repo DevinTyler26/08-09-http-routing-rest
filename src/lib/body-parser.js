@@ -5,7 +5,7 @@ const queryString = require('querystring');
 
 module.exports = (request) => {
   return new Promise((resolve, reject) => {
-    if (!request || !request.url) return reject(new Error('Invaild Req Obj'));
+    if (!request || !request.url) return reject(new Error('Invalid Req Obj'));
     request.url = url.parse(request.url);
     request.url.query = queryString.parse(request.url.query);
         

@@ -4,7 +4,7 @@ const superagent = require('superagent');
 const server = require('../lib/server');
 const Car = require('../model/car');
 
-const apiUrl = 'http://localhost:5000/api/v1/car';
+const apiUrl = 'http://localhost:5000/api/v1/cars';
 
 const mockRes = {
   make: 'test make',
@@ -14,7 +14,7 @@ const mockRes = {
 beforeAll(() => server.start(5000));
 afterAll(() => server.stop());
 
-describe('POST to /api/v1/car', () => {
+describe('POST to /api/v1/cars', () => {
   test('200 for successful saving of a new car', () => {
     return superagent.post(apiUrl)
       .send(mockRes)
@@ -42,13 +42,14 @@ describe('POST to /api/v1/car', () => {
   });
 });
 
-describe('GET /api/v1/car', () => {
-  let mockResForGet;
-  beforeEach(() => {
+describe('GET /api/v1/cars', () => {
+  let mockResForGET;
+  beforeEach((done) => {
     const newCar = new Car(mockRes);
     newCar.save()
       .then((car) => {
-        mockResForGet = car;
+        mockResForGET = car;
+        done();
       })
       .catch((err) => {
         throw err;
@@ -56,12 +57,12 @@ describe('GET /api/v1/car', () => {
   });
 
   test('200 successful GET request', () => {
-    return superagent.get(`${apiUrl}?id=${mockResForGet._id}`)
+    return superagent.get(`${apiUrl}?id=${mockResForGET._id}`)
       .then((response) => {
         expect(response.status).toEqual(200);
-        expect(response.body.make).toEqual(mockResForGet.make);
-        expect(response.body.model).toEqual(mockResForGet.model);
-        expect(response.body.createdOn).toEqual(mockResForGet.createdOn.toISOString());
+        expect(response.body.make).toEqual(mockResForGET.make);
+        expect(response.body.model).toEqual(mockResForGET.model);
+        expect(response.body.createdOn).toEqual(mockResForGET.createdOn.toISOString());
       })
       .catch((err) => {
         throw err;

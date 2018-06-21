@@ -8,11 +8,11 @@ const memory = {};
 storage.save = (schema, item) => {
   return new Promise((resolve, reject) => {
     if (!schema) return reject(new Error('Cannot create new item, scheam required'));
-    if (!item || !item.title) return reject(new Error('Cannot create new item, item and title are required'));
+    if (!item || !item.make) return reject(new Error('Cannot create new item, item make are required'));
     if (!memory[schema]) memory[schema] = {};
     memory[schema][item._id] = item;
     logger.log(logger.INFO, `Storage fetching ${JSON.stringify(item)}`);
-    return Promise.resolve(item);
+    return resolve(item);
   });
 };
 

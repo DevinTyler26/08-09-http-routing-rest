@@ -7,9 +7,7 @@ const responses = require('./response');
 module.exports = class Router {
   constructor() {
     this.routes = {
-      GET: {
-
-      },
+      GET: {},
       POST: {},
       PUT: {},
       DELETE: {},
@@ -39,10 +37,10 @@ module.exports = class Router {
           const reqResCb = this.routes[req.method][req.url.pathname];
           const isFunction = typeof reqResCb === 'function';
           if (isFunction) return reqResCb(req, res);
-          responses.sendError(res, 404, 'Route not registered');
+          responses.sendError(res, 400, 'Route not registered');
           return undefined;
         })
-        .cath((err) => {
+        .catch((err) => {
           logger.log(logger.INFO, JSON.stringify(err));
           responses.sendError(res, 404, 'Route not found');
           return undefined;
