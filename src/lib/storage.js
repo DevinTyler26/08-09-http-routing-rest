@@ -23,3 +23,13 @@ storage.get = (schema, _id) => {
   }
   return Promise.reject(new Error(`${_id} not found`));
 }; 
+
+storage.delete = (schema, _id) => {
+  if (memory[schema][_id]) {
+    logger.log(logger.INFO, `Storage: deleting ${JSON.stringify(memory[schema][_id], null, 2)}`);
+    delete memory[schema][_id];
+    return Promise.resolve(memory[schema][_id]);
+  }
+  return Promise.reject(new Error(`${_id} not found`));
+}; 
+
