@@ -30,6 +30,6 @@ storage.delete = (schema, _id) => {
     delete memory[schema][_id];
     return Promise.resolve(memory[schema][_id]);
   }
-  return Promise.reject(new Error(`${_id} not found`));
+  return Promise.reject(new Error(`${_id} not found!`));
 }; 
 

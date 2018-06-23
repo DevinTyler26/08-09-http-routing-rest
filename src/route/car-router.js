@@ -35,4 +35,20 @@ module.exports = (router) => {
       });
     return undefined;
   });
+
+  router.delete('/api/v1/cars', (request, response) => {
+    if (!request.url.query.id) {
+      responses.sendError(response, 404, 'Your request needs an id');
+      return undefined;
+    }
+    Car.deleteOne(request.url.query.id)
+      .then((car) => {
+        responses.sendJSON(response, 200, car);
+      })
+      .catch((err) => {
+        console.log(err);
+        responses.sendError(response, 404, err.message);
+      });
+    return undefined;
+  });
 };
