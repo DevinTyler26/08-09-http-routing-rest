@@ -41,9 +41,11 @@ module.exports = (router) => {
       responses.sendError(response, 404, 'Your request needs an id');
       return undefined;
     }
-    Car.deleteOne(request.url.query.id)
+    Car.delete(request.url.query.id)
       .then((car) => {
-        responses.sendJSON(response, 200, car);
+        responses.sendJSON(response, 200, {
+          result: `${car.make} has been deleted`
+        })
       })
       .catch((err) => {
         console.log(err);

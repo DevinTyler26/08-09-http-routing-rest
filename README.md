@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/DevinTyler26/08-09-http-routing-rest.svg?branch=lab-08)](https://travis-ci.org/DevinTyler26/08-09-http-routing-rest)
 ![cf](https://i.imgur.com/7v5ASc8.png)    
 # Lab 08: Vanilla REST API w/ Routing and In Memory Persistence
 
@@ -84,6 +85,8 @@ Configure the root of your repository with the following files and directories. 
  * Create a new `GET` route or modify your original `GET` route so that it can accept other query paramters besides an ID, such as `/api/v1/notes?title=hello&content=world`. The behavior of this route should search through your storage module and return an array of all resources matching that criteria. 
  
  ## Documentation
- Add your Travis badge to the top of your README. List all of your registered routes and describe their behavior. Describe what your resouce is. Imagine you are providing this API to other developers who need to research your API in order to use it. Describe how a developer should be able to make requests to your API. Refer to the [PokeAPI docs](https://pokeapi.co/docsv2/#resource-lists) for a good example to follow. 
+- carRouter.post('/api/cars/) this will post a new car to the database
+- carRouter.get('/api/cars/:id?') this will go to the db and search for a car based on the given id
+- carRouter.delete('/api/cars/:id?') this will find a car in the db based on the given id and delete it
 
 

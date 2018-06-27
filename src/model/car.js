@@ -19,7 +19,7 @@ module.exports = class Car {
     return storage.get('Cars', _id);
   }
 
-  static deleteOne(_id) {
-    return storage.delete(_id);
+  static delete(_id) {
+    return storage.delete('Cars', _id);
   }
 };

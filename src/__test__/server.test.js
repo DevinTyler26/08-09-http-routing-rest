@@ -69,16 +69,58 @@ describe('GET /api/v1/cars', () => {
       });
   });
 
-  test('200 successful DELETE request', () => {
-    return superagent.delete(`${apiUrl}?id=${mockResForGET._id}`)
+  test('404 bad GET request', () => {
+    return superagent.get(`${apiUrl}`)
       .then((response) => {
-        // expect(response.status).toEqual(200);
-        expect(response.body.make).toEqual(null);
-        expect(response.body.model).toEqual(null);
-        expect(response.body.createdOn).toEqual(null);
+        throw err;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(404);
+      });
+  });
+});
+
+describe('DELETE /api/v1/cars', () => {
+  let mockResForGET;
+  beforeEach((done) => {
+    const newCar = new Car(mockRes);
+    newCar.save()
+      .then((car) => {
+        mockResForGET = car;
+        done();
       })
       .catch((err) => {
         throw err;
+      });
+  });
+  test('200 successful DELETE request', () => {
+    console.log(`DELETING ${mockResForGET._id}`);
+    return superagent.delete(`${apiUrl}?id=${mockResForGET._id}`)
+      .then((response) => {
+        expect(response.status).toEqual(200);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  });
+  test('404 bad DELETE request', () => {
+    return superagent.delete(`${apiUrl}`)
+      .then((response) => {
+        throw err;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(404);
+      });
+  });
+});
+describe('Bad request for no input', () => {
+  test('404 bad request', () => {
+    return superagent.get(`${apiUrl}`)
+      .then((response) => {
+        throw err;
+      })
+      .catch((err) => {
+        expect(err.status).toEqual(404);
       });
   });
 });
