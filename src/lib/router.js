@@ -37,7 +37,7 @@ module.exports = class Router {
           const reqResCb = this.routes[req.method][req.url.pathname];
           const isFunction = typeof reqResCb === 'function';
           if (isFunction) return reqResCb(req, res);
-          responses.sendError(res, 400, 'Route not registered');
+          responses.sendError(res, 400, 'Route not registered ');
           return undefined;
         })
         .catch((err) => {
