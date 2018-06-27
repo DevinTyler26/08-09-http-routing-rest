@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/DevinTyler26/08-09-http-routing-rest.svg?branch=lab-08)](https://travis-ci.org/DevinTyler26/08-09-http-routing-rest)
 ![cf](https://i.imgur.com/7v5ASc8.png)    
-# Lab 08: Vanilla REST API w/ Routing and In Memory Persistence
+# Lab 08: Vanilla REST API w/ Routing and In Memory Persistence 
 
 ## Submission Instructions
 * Work in a fork of this repository
